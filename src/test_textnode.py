@@ -19,7 +19,14 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("This is a text node", TextType.BOLD, url=None)
         node2 = TextNode("This is a text node", TextType.BOLD)
         self.assertEqual(node, node2)
+    
+    def test_repr(self):
+        node = TextNode("This is a text node", TextType.TEXT, "https://www.boot.dev")
+        self.assertEqual(
+            "TextNode(This is a text node, text, https://www.boot.dev)", repr(node)
+        )
 
+class TestTextNodeToHTMLNode(unittest.TestCase):
     def test_converting_simple_textnode(self):
         node = TextNode("very simple", TextType.TEXT)
         expected = LeafNode(None, "very simple")
