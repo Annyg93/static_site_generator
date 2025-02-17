@@ -1,5 +1,6 @@
 from textnode import TextNode, TextType
 
+
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     if text_type not in TextType:
         raise Exception("invalid text type")
@@ -18,15 +19,15 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
             if first_break == -1 or second_break == -1:
                 raise Exception("Invalid syntax: Missing matching delimiters in text.")
 
-            first_part = (text[:first_break])
-            second_part = (text[first_break + len(delimiter):second_break])
-            third_part = (text[second_break + len(delimiter):])
+            first_part = text[:first_break]
+            second_part = text[first_break + len(delimiter) : second_break]
+            third_part = text[second_break + len(delimiter) :]
 
             new_nodes.append(TextNode(first_part, TextType.TEXT))
             new_nodes.append(TextNode(second_part, text_type))
             text = third_part
-        
+
         if text:
             new_nodes.append(TextNode(text, TextType.TEXT))
 
-        
+    return new_nodes
